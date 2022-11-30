@@ -4,40 +4,18 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-st.title('AR686')
-st.write("Web App นี้เป็นส่วนหนึ่งของวิชา AR686 คณะสถาปัตยกรรมศาสตร์มหาวิทยาลัยธรรมศาสตร์")
-df = pd.read_csv('StudentsPerformance.csv')
+st.title('Wild Fire')
+st.subheader('Wild Fire in North-Easthern of Thailand')
+from PIL import Image
+image = Image.open('picc.png')
+st.image(image,width=800)
+# Store the initial value of widgets in session state
+if "visibility" not in st.session_state:
+    st.session_state.visibility = "visible"
+    st.session_state.disabled = False
 
-st.dataframe(df)
+    option = st.selectbox(
+        "เลือกจังหวัด",
+        ("นครราชสีมา", "บุรีรัมย์", "สุรินทร์","ชัยภูมิ", "ศรีษะเกศ", "ขอนแก่น","อุดรธานี", "เลย", "หนองบัวลำภู", "มหาสารคาม","ร้อยเอ็ด", "หนองคาย", "บึงกาฬ", "สกลนคร","นครพนม", "กาฬสินธุ์", "มุกดาหาร", "ยโสธร","อำนาจเจริญ", "อุบลราชธานี"),
+        )
 
-option = st.selectbox("เลือก Col ที่ต้องการแสดง Group", df.columns)
-
-fig = plt.figure(figsize=(10, 4))
-sns.countplot(x=df[option])
-
-st.write("""
-# แสดงกราฟ
-
-อธิบาย xxx
-""")
-st.pyplot(fig)
-
-
-
-st.write("""
-# Scatter Plot
-
-อธิบาย xxx
-""")
-fig = plt.figure(figsize=(10, 4))
-sns.scatterplot(x="math score", y="reading score", data=df)
-
-st.pyplot(fig)
-
-#st.write()
-
-df2 = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [13.8, 100.55],
-    columns=['lat', 'lon'])
-
-st.map(df2)
